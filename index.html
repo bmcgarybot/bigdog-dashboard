@@ -133,12 +133,15 @@
     <div class="project-body">
       <div class="task-section"><h4>🔥 Grants (Urgent)</h4>
         <div class="task-list" id="tasks-emi-grants">
-        <div class="task-item"><input type="checkbox" data-key="emi-1"><span class="task-label">Submit ARI pre-application ($100K)</span><span class="task-due urgent">May 18</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="emi-1"><span class="task-label">Submit ARI pre-application ($100K, no salary)</span><span class="task-due urgent">May 18</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
         <div class="task-item"><input type="checkbox" data-key="emi-2"><span class="task-label">Send NEXT for AUTISM inquiry</span><span class="task-due soon">This week</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
         <div class="task-item"><input type="checkbox" data-key="emi-3"><span class="task-label">Apply to OAR ($50K)</span><span class="task-due later">June</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
         <div class="task-item"><input type="checkbox" data-key="emi-4"><span class="task-label">Apply to Doug Flutie Foundation</span><span class="task-due later">June</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
-        <div class="task-item"><input type="checkbox" data-key="emi-5"><span class="task-label">Form LLC — Quantum Neuroshift</span><span class="task-due later">Q3 2026</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
-        <div class="task-item"><input type="checkbox" data-key="emi-6"><span class="task-label">ARI full proposal (if invited)</span><span class="task-due later">Aug 3</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="emi-5"><span class="task-label">Form LLC — Quantum Neuroshift ($50, Arizona)</span><span class="task-due soon">June</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="emi-6"><span class="task-label">Register on SAM.gov (required for SBIR, takes 2-4 weeks)</span><span class="task-due soon">June</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="emi-7"><span class="task-label">Register on Grants.gov + eRA Commons</span><span class="task-due soon">June</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="emi-8"><span class="task-label">NIH SBIR Phase I application ($323K, PAYS YOU $30/hr)</span><span class="task-due urgent">Sep 5</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="emi-9"><span class="task-label">ARI full proposal (if invited)</span><span class="task-due later">Aug 3</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
         </div>
         <div class="add-task-bar"><input type="text" placeholder="Add a task..." onkeydown="if(event.key==='Enter')addTaskToSection(this,'emi-grants')"><button onclick="addTaskToSection(this.previousElementSibling,'emi-grants')">+ Add</button></div>
       </div>
@@ -304,7 +307,7 @@
 <div class="save-notice" id="saveNotice">✓ Saved</div>
 
 <script>
-const STATE_KEY='bigdog-dashboard-v3';
+const STATE_KEY='bigdog-dashboard-v4';
 function loadState(){try{return JSON.parse(localStorage.getItem(STATE_KEY))||{}}catch{return{}}}
 function saveState(s){localStorage.setItem(STATE_KEY,JSON.stringify(s));const el=document.getElementById('saveNotice');el.classList.add('show');setTimeout(()=>el.classList.remove('show'),1500)}
 
@@ -313,7 +316,7 @@ const state=loadState();
 // Default steps (used on first load or if no saved steps)
 const defaultSteps=[
   {id:'step-1',text:'<strong>Wait for Lisa/Sean/Mitchell responses</strong>',detail:'Need their full names + credentials for the ARI pre-app'},
-  {id:'step-2',text:'<strong>Fill advisor names into ARI pre-application</strong>',detail:'Open "ARI-Pre-Application.docx" from email. Search for "[OT Name" and "[Teacher Name". Replace with real info.'},
+  {id:'step-2',text:'<strong>Fill advisor names into ARI pre-application</strong>',detail:'Lisa Bailey is filled in. Sean certification pending. Open updated doc from email.'},
   {id:'step-3',text:'<strong>Email finished pre-app to: research@autism.org</strong>',detail:'Subject: "Letter of Interest — Technology-Assisted EMI for Autism De-Escalation"'},
   {id:'step-4',text:'<strong>Send NEXT for AUTISM inquiry</strong>',detail:'Draft is in your email. Copy-paste and send to: grants@nextforautism.org'},
   {id:'step-5',text:'<strong>Set up Xcode on your Mac</strong>',detail:'Step-by-step guide in your email: "XCODE SETUP GUIDE". Follow it exactly. Swift source in GitHub repo.'},
@@ -321,6 +324,8 @@ const defaultSteps=[
   {id:'step-7',text:'<strong>Test web prototype with Liam (calm moment)</strong>',detail:'Use headphones. Open HTML file or bmcgarybot.github.io/emi-tech-prototype (password: QuantumNeuroshift2026!)'},
   {id:'step-8',text:'<strong>Share prototype link with Sean for feedback</strong>',detail:'Send him the password-protected link + password. Ask what he thinks clinically.'},
   {id:'step-9',text:'<strong>Tell Gary to pull the repo</strong>',detail:'Send the MESSAGE-FOR-GARY-SWIFT.md content. He needs to clone the private repo and read STATUS.md.'},
+  {id:'step-10',text:'<strong>Form Quantum Neuroshift LLC in June ($50)</strong>',detail:'Arizona Corporation Commission online. Guide in your email: "Arizona LLC Formation Guide". Needed for SBIR grant.'},
+  {id:'step-11',text:'<strong>Register on SAM.gov in June</strong>',detail:'sam.gov — takes 2-4 weeks to process. Required for SBIR. Start as soon as LLC is formed.'},
 ];
 
 if(!state.steps) state.steps=defaultSteps;
@@ -493,6 +498,7 @@ const deadlines=[
   {name:'Doug Flutie Foundation',desc:'Quality of life project grant',date:'2026-06-30',color:'var(--accent-emi)'},
   {name:'ARI Full Proposal',desc:'Only if invited after pre-app',date:'2026-08-03',color:'var(--accent-emi)'},
   {name:'iOS App on App Store',desc:'Native Swift app live for purchase',date:'2026-07-01',color:'var(--accent-emi)'},
+  {name:'NIH SBIR Phase I Deadline',desc:'$323K grant application (pays you $30/hr)',date:'2026-09-05',color:'var(--accent-emi)'},
   {name:'Test with Your Kid',desc:'Put the prototype in his hands',date:'2026-07-15',color:'var(--done)'},
   {name:'⚠️ Slug Access May End',desc:'All docs backed up to GitHub + email',date:'2026-05-31',color:'var(--warning)'},
 ];

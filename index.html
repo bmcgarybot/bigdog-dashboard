@@ -74,11 +74,13 @@
   .drag-handle:active{cursor:grabbing}
   .delete-step{color:#ef4444;cursor:pointer;font-size:14px;padding:2px 6px;border:none;background:none;opacity:.4;transition:opacity .15s;flex-shrink:0}
   .delete-step:hover{opacity:1}
-  .add-step-bar{display:flex;gap:8px;margin-top:12px}
-  .add-step-bar input{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:10px 12px;font-family:inherit;font-size:13px}
-  .add-step-bar input:focus{outline:none;border-color:var(--accent-emi)}
-  .add-step-bar button{background:var(--accent-emi);color:white;border:none;border-radius:8px;padding:10px 16px;font-weight:700;cursor:pointer;font-size:14px}
-  .add-step-bar button:hover{opacity:.85}
+  .add-step-bar,.add-task-bar{display:flex;gap:8px;margin-top:12px}
+  .add-step-bar input,.add-task-bar input{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:10px 12px;font-family:inherit;font-size:13px}
+  .add-step-bar input:focus,.add-task-bar input:focus{outline:none;border-color:var(--accent-emi)}
+  .add-step-bar button,.add-task-bar button{background:var(--accent-emi);color:white;border:none;border-radius:8px;padding:10px 16px;font-weight:700;cursor:pointer;font-size:14px;white-space:nowrap}
+  .add-step-bar button:hover,.add-task-bar button:hover{opacity:.85}
+  .task-item .delete-task{color:#ef4444;cursor:pointer;font-size:14px;padding:2px 6px;border:none;background:none;opacity:.4;transition:opacity .15s;flex-shrink:0}
+  .task-item .delete-task:hover{opacity:1}
   .toolbar{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
   .toolbar button{background:var(--card);border:1px solid var(--border);color:var(--text);padding:8px 14px;border-radius:8px;cursor:pointer;font-size:12px;font-family:inherit}
   .toolbar button:hover{border-color:var(--accent-emi);color:var(--text-bright)}
@@ -130,25 +132,31 @@
     <div class="progress-bar"><div class="fill" style="width:15%;background:var(--accent-emi)"></div></div>
     <div class="project-body">
       <div class="task-section"><h4>🔥 Grants (Urgent)</h4>
-        <div class="task-item"><input type="checkbox" data-key="emi-1"><span class="task-label">Submit ARI pre-application ($100K)</span><span class="task-due urgent">May 18</span></div>
-        <div class="task-item"><input type="checkbox" data-key="emi-2"><span class="task-label">Send NEXT for AUTISM inquiry</span><span class="task-due soon">This week</span></div>
-        <div class="task-item"><input type="checkbox" data-key="emi-3"><span class="task-label">Apply to OAR ($50K)</span><span class="task-due later">June</span></div>
-        <div class="task-item"><input type="checkbox" data-key="emi-4"><span class="task-label">Apply to Doug Flutie Foundation</span><span class="task-due later">June</span></div>
-        <div class="task-item"><input type="checkbox" data-key="emi-5"><span class="task-label">Form LLC — Quantum Neuroshift</span><span class="task-due later">Q3 2026</span></div>
-        <div class="task-item"><input type="checkbox" data-key="emi-6"><span class="task-label">ARI full proposal (if invited)</span><span class="task-due later">Aug 3</span></div>
+        <div class="task-list" id="tasks-emi-grants">
+        <div class="task-item"><input type="checkbox" data-key="emi-1"><span class="task-label">Submit ARI pre-application ($100K)</span><span class="task-due urgent">May 18</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="emi-2"><span class="task-label">Send NEXT for AUTISM inquiry</span><span class="task-due soon">This week</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="emi-3"><span class="task-label">Apply to OAR ($50K)</span><span class="task-due later">June</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="emi-4"><span class="task-label">Apply to Doug Flutie Foundation</span><span class="task-due later">June</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="emi-5"><span class="task-label">Form LLC - Quantum Neuroshift</span><span class="task-due later">Q3 2026</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="emi-6"><span class="task-label">ARI full proposal (if invited)</span><span class="task-due later">Aug 3</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        </div>
+        <div class="add-task-bar"><input type="text" placeholder="Add a task..." onkeydown="if(event.key==='Enter')addTaskToSection(this,'emi-grants')"><button onclick="addTaskToSection(this.previousElementSibling,'emi-grants')">+ Add</button></div>
       </div>
       <div class="task-section"><h4>📱 FlutterFlow Prototype</h4>
-        <div class="task-item"><input type="checkbox" data-key="emi-10"><span class="task-label">Horizontal arrow pattern</span><span class="task-due soon">May</span></div>
-        <div class="task-item"><input type="checkbox" data-key="emi-11"><span class="task-label">Vertical arrow pattern</span><span class="task-due soon">May</span></div>
-        <div class="task-item"><input type="checkbox" data-key="emi-12"><span class="task-label">Circle/spiral pattern</span><span class="task-due later">June</span></div>
-        <div class="task-item"><input type="checkbox" data-key="emi-13"><span class="task-label">Breathing prompts between patterns</span><span class="task-due later">June</span></div>
-        <div class="task-item"><input type="checkbox" data-key="emi-14"><span class="task-label">Full session flow connected</span><span class="task-due later">June</span></div>
-        <div class="task-item"><input type="checkbox" data-key="emi-15"><span class="task-label">Haptic feedback (vibration)</span><span class="task-due later">June</span></div>
-        <div class="task-item"><input type="checkbox" data-key="emi-16"><span class="task-label">Audio cues ("Eyes left...")</span><span class="task-due later">June</span></div>
-        <div class="task-item"><input type="checkbox" data-key="emi-17"><span class="task-label">Parent settings + PIN lock</span><span class="task-due later">July</span></div>
-        <div class="task-item"><input type="checkbox" data-key="emi-18"><span class="task-label">Celebration/completion screen</span><span class="task-due later">July</span></div>
-        <div class="task-item"><input type="checkbox" data-key="emi-19"><span class="task-label">Disengagement overlay (30s reset)</span><span class="task-due later">July</span></div>
-        <div class="task-item"><input type="checkbox" data-key="emi-20"><span class="task-label">🎯 TEST WITH YOUR KID</span><span class="task-due soon">July</span></div>
+        <div class="task-list" id="tasks-emi-flutter">
+        <div class="task-item"><input type="checkbox" data-key="emi-10"><span class="task-label">Horizontal arrow pattern</span><span class="task-due soon">May</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="emi-11"><span class="task-label">Vertical arrow pattern</span><span class="task-due soon">May</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="emi-12"><span class="task-label">Circle/spiral pattern</span><span class="task-due later">June</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="emi-13"><span class="task-label">Breathing prompts between patterns</span><span class="task-due later">June</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="emi-14"><span class="task-label">Full session flow connected</span><span class="task-due later">June</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="emi-15"><span class="task-label">Haptic feedback (vibration)</span><span class="task-due later">June</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="emi-16"><span class="task-label">Audio cues ("Eyes left...")</span><span class="task-due later">June</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="emi-17"><span class="task-label">Parent settings + PIN lock</span><span class="task-due later">July</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="emi-18"><span class="task-label">Celebration/completion screen</span><span class="task-due later">July</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="emi-19"><span class="task-label">Disengagement overlay (30s reset)</span><span class="task-due later">July</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="emi-20"><span class="task-label">🎯 TEST WITH YOUR KID</span><span class="task-due soon">July</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        </div>
+        <div class="add-task-bar"><input type="text" placeholder="Add a task..." onkeydown="if(event.key==='Enter')addTaskToSection(this,'emi-flutter')"><button onclick="addTaskToSection(this.previousElementSibling,'emi-flutter')">+ Add</button></div>
       </div>
     </div>
   </div>
@@ -158,11 +166,14 @@
     <div class="progress-bar"><div class="fill" style="width:8%;background:var(--accent-safe)"></div></div>
     <div class="project-body">
       <div class="task-section"><h4>When Ready to Build</h4>
-        <div class="task-item"><input type="checkbox" data-key="safe-1"><span class="task-label">Browser extension scaffold</span><span class="task-due later">TBD</span></div>
-        <div class="task-item"><input type="checkbox" data-key="safe-2"><span class="task-label">Kid Mode overlay</span><span class="task-due later">TBD</span></div>
-        <div class="task-item"><input type="checkbox" data-key="safe-3"><span class="task-label">Flag toolbar</span><span class="task-due later">TBD</span></div>
-        <div class="task-item"><input type="checkbox" data-key="safe-4"><span class="task-label">Backend API + community flagging</span><span class="task-due later">TBD</span></div>
-        <div class="task-item"><input type="checkbox" data-key="safe-5"><span class="task-label">Parent dashboard</span><span class="task-due later">TBD</span></div>
+        <div class="task-list" id="tasks-safe-build">
+        <div class="task-item"><input type="checkbox" data-key="safe-1"><span class="task-label">Browser extension scaffold</span><span class="task-due later">TBD</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="safe-2"><span class="task-label">Kid Mode overlay</span><span class="task-due later">TBD</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="safe-3"><span class="task-label">Flag toolbar</span><span class="task-due later">TBD</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="safe-4"><span class="task-label">Backend API + community flagging</span><span class="task-due later">TBD</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="safe-5"><span class="task-label">Parent dashboard</span><span class="task-due later">TBD</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        </div>
+        <div class="add-task-bar"><input type="text" placeholder="Add a task..." onkeydown="if(event.key==='Enter')addTaskToSection(this,'safe-build')"><button onclick="addTaskToSection(this.previousElementSibling,'safe-build')">+ Add</button></div>
       </div>
     </div>
   </div>
@@ -172,22 +183,28 @@
     <div class="progress-bar"><div class="fill" style="width:60%;background:var(--accent-timer)"></div></div>
     <div class="project-body">
       <div class="task-section"><h4>Tasks</h4>
-        <div class="task-item checked"><input type="checkbox" data-key="timer-1" checked><span class="task-label">Fix color swatch bug</span><span class="task-due done">Done ✓</span></div>
-        <div class="task-item"><input type="checkbox" data-key="timer-2"><span class="task-label">Check Google Form for feedback</span><span class="task-due soon">Ongoing</span></div>
-        <div class="task-item"><input type="checkbox" data-key="timer-3"><span class="task-label">Implement feedback changes</span><span class="task-due later">As received</span></div>
+        <div class="task-list" id="tasks-timer">
+        <div class="task-item checked"><input type="checkbox" data-key="timer-1" checked><span class="task-label">Fix color swatch bug</span><span class="task-due done">Done ✓</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="timer-2"><span class="task-label">Check Google Form for feedback</span><span class="task-due soon">Ongoing</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="timer-3"><span class="task-label">Implement feedback changes</span><span class="task-due later">As received</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        </div>
+        <div class="add-task-bar"><input type="text" placeholder="Add a task..." onkeydown="if(event.key==='Enter')addTaskToSection(this,'timer')"><button onclick="addTaskToSection(this.previousElementSibling,'timer')">+ Add</button></div>
       </div>
     </div>
   </div>
 
   <div class="project-card" id="card-soul">
-    <div class="project-header" onclick="toggleCard('card-soul')"><div class="emoji">⭐</div><div class="info"><h3>Soul Map Quality (Gary)</h3><div class="status" style="color:var(--accent-soul)">Critique Sent — Gary Needs to Fix</div></div><div class="toggle">▼</div></div>
+    <div class="project-header" onclick="toggleCard('card-soul')"><div class="emoji">⭐</div><div class="info"><h3>Soul Map Quality (Gary)</h3><div class="status" style="color:var(--accent-soul)">Critique Sent - Gary Needs to Fix</div></div><div class="toggle">▼</div></div>
     <div class="progress-bar"><div class="fill" style="width:30%;background:var(--accent-soul)"></div></div>
     <div class="project-body">
       <div class="task-section"><h4>Tasks</h4>
-        <div class="task-item checked"><input type="checkbox" data-key="soul-1" checked><span class="task-label">Write detailed critique</span><span class="task-due done">Done ✓</span></div>
-        <div class="task-item"><input type="checkbox" data-key="soul-2"><span class="task-label">Pass critique to Gary</span><span class="task-due soon">This week</span></div>
-        <div class="task-item"><input type="checkbox" data-key="soul-3"><span class="task-label">Gary implements fixes</span><span class="task-due later">TBD</span></div>
-        <div class="task-item"><input type="checkbox" data-key="soul-4"><span class="task-label">Review improved reading</span><span class="task-due later">TBD</span></div>
+        <div class="task-list" id="tasks-soul">
+        <div class="task-item checked"><input type="checkbox" data-key="soul-1" checked><span class="task-label">Write detailed critique</span><span class="task-due done">Done ✓</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="soul-2"><span class="task-label">Pass critique to Gary</span><span class="task-due soon">This week</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="soul-3"><span class="task-label">Gary implements fixes</span><span class="task-due later">TBD</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="soul-4"><span class="task-label">Review improved reading</span><span class="task-due later">TBD</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        </div>
+        <div class="add-task-bar"><input type="text" placeholder="Add a task..." onkeydown="if(event.key==='Enter')addTaskToSection(this,'soul')"><button onclick="addTaskToSection(this.previousElementSibling,'soul')">+ Add</button></div>
       </div>
     </div>
   </div>
@@ -329,12 +346,11 @@ function exportState(){
     const plain=s.text.replace(/<[^>]+>/g,'');
     lines.push(`${done} ${i+1}. ${plain}`);
   });
-  lines.push('','--- Checked Tasks ---');
+  lines.push('','--- All Project Tasks ---');
   document.querySelectorAll('.task-item input[data-key]').forEach(cb=>{
-    if(cb.checked){
-      const label=cb.closest('.task-item').querySelector('.task-label');
-      if(label)lines.push('[x] '+label.textContent);
-    }
+    const done=cb.checked?'[x]':'[ ]';
+    const label=cb.closest('.task-item').querySelector('.task-label');
+    if(label)lines.push(`${done} ${label.textContent}`);
   });
   lines.push('','--- Notes ---',state.notes||'(none)');
   const txt=lines.join('\n');
@@ -354,6 +370,63 @@ document.querySelectorAll('.task-item input[type="checkbox"][data-key]').forEach
 const notesArea=document.getElementById('notesArea');
 notesArea.value=state.notes||'';
 notesArea.addEventListener('input',()=>{state.notes=notesArea.value;saveState(state)});
+
+// Add task to a project category section
+function addTaskToSection(input, sectionId){
+  const text=input.value.trim();
+  if(!text)return;
+  const key='custom-'+sectionId+'-'+Date.now();
+  const list=document.getElementById('tasks-'+sectionId);
+  const div=document.createElement('div');
+  div.className='task-item';
+  div.innerHTML=`<input type="checkbox" data-key="${key}"><span class="task-label">${text}</span><span class="task-due later">New</span><button class="delete-task" onclick="deleteTask(this)">✕</button>`;
+  list.appendChild(div);
+  const cb=div.querySelector('input[type="checkbox"]');
+  cb.addEventListener('change',()=>{state.checks[key]=cb.checked;div.classList.toggle('checked',cb.checked);saveState(state);updateProgress()});
+  // Save custom tasks
+  if(!state.customTasks) state.customTasks={};
+  if(!state.customTasks[sectionId]) state.customTasks[sectionId]=[];
+  state.customTasks[sectionId].push({key,text});
+  input.value='';
+  saveState(state);
+}
+
+// Delete a task from a category
+function deleteTask(btn){
+  if(!confirm('Remove this task?'))return;
+  const item=btn.closest('.task-item');
+  const cb=item.querySelector('input[data-key]');
+  if(cb){
+    const key=cb.dataset.key;
+    delete state.checks[key];
+    // Remove from custom tasks if it's a custom one
+    if(state.customTasks){
+      Object.keys(state.customTasks).forEach(sec=>{
+        state.customTasks[sec]=state.customTasks[sec].filter(t=>t.key!==key);
+      });
+    }
+  }
+  item.remove();
+  saveState(state);
+  updateProgress();
+}
+
+// Restore custom tasks on load
+if(state.customTasks){
+  Object.keys(state.customTasks).forEach(sectionId=>{
+    const list=document.getElementById('tasks-'+sectionId);
+    if(!list)return;
+    state.customTasks[sectionId].forEach(t=>{
+      const div=document.createElement('div');
+      div.className='task-item';
+      if(state.checks[t.key])div.classList.add('checked');
+      div.innerHTML=`<input type="checkbox" data-key="${t.key}" ${state.checks[t.key]?'checked':''}><span class="task-label">${t.text}</span><span class="task-due later">New</span><button class="delete-task" onclick="deleteTask(this)">✕</button>`;
+      list.appendChild(div);
+      const cb=div.querySelector('input[type="checkbox"]');
+      cb.addEventListener('change',()=>{state.checks[t.key]=cb.checked;div.classList.toggle('checked',cb.checked);saveState(state);updateProgress()});
+    });
+  });
+}
 
 function toggleCard(id){document.getElementById(id).classList.toggle('open')}
 

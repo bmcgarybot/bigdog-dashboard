@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>EMI-Tech</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Nunito',sans-serif;background:#1a1a2e;color:#fff;min-height:100vh;min-height:100dvh;overflow:hidden;touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+.scr{display:none;position:fixed;inset:0;flex-direction:column;align-items:center;justify-content:center}.scr.on{display:flex}
+
+#info{background:linear-gradient(135deg,#667eea,#764ba2);overflow-y:auto;-webkit-overflow-scrolling:touch}
+
+/* HOME */
+#home{background:linear-gradient(135deg,#667eea,#764ba2);gap:12px;padding:20px;text-align:center}
+.logo{font-size:clamp(28px,7vw,72px);font-weight:900;background:linear-gradient(135deg,#f6d365,#fda085);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.tagline{font-size:clamp(12px,2.5vw,18px);color:rgba(255,255,255,.75);max-width:360px;line-height:1.3}
+.go-btn{background:linear-gradient(135deg,#43e97b,#38f9d7);color:#1a1a2e;border:none;border-radius:60px;padding:14px 50px;font-size:clamp(20px,4vw,36px);font-weight:900;font-family:inherit;cursor:pointer;box-shadow:0 6px 24px rgba(67,233,123,.4);animation:pulse 2s ease-in-out infinite}
+.go-btn:active{transform:scale(.95);animation:none}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04);box-shadow:0 10px 36px rgba(67,233,123,.55)}}
+.plink{color:rgba(255,255,255,.4);font-size:12px;cursor:pointer;padding:8px 16px;margin-top:4px}
+/* Landscape home */
+@media (orientation:landscape){
+  #home{gap:8px;padding:12px;flex-direction:column}
+  .logo{font-size:clamp(24px,5vh,48px)}
+  .go-btn{padding:10px 40px;font-size:clamp(18px,4vh,30px)}
+}
+
+/* PIN */
+#pin{background:linear-gradient(135deg,#1a1a2e,#16213e);gap:28px}
+.ptitle{font-size:22px;font-weight:700;color:rgba(255,255,255,.8)}
+.pdots{display:flex;gap:16px}
+.pdot{width:18px;height:18px;border-radius:50%;border:2px solid rgba(255,255,255,.25);transition:all .2s}
+.pdot.on{background:#43e97b;border-color:#43e97b;transform:scale(1.15)}
+.pdot.bad{background:#e94560;border-color:#e94560;animation:shake .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.perr{color:#e94560;font-size:13px;min-height:18px}
+.npad{display:grid;grid-template-columns:repeat(3,72px);gap:10px}
+.npad button{width:72px;height:72px;border-radius:50%;border:2px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:#fff;font-size:26px;font-weight:700;font-family:inherit;cursor:pointer;transition:background .1s}
+.npad button:active{background:rgba(255,255,255,.12)}
+.npad .fn{font-size:16px;color:rgba(255,255,255,.5)}
+.blink{color:rgba(255,255,255,.4);background:none;border:none;font-size:15px;font-family:inherit;cursor:pointer;padding:12px;margin-top:8px}
+
+/* SETTINGS */
+#settings{background:linear-gradient(135deg,#1a1a2e,#16213e);overflow-y:auto;-webkit-overflow-scrolling:touch;padding:30px 16px 40px;align-items:stretch;justify-content:flex-start}
+.shd{text-align:center;font-size:26px;font-weight:900;margin-bottom:20px}
+.sg{background:rgba(255,255,255,.05);border-radius:14px;padding:16px;margin-bottom:14px}
+.sg h3{font-size:12px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px}
+.sr{display:flex;align-items:center;justify-content:space-between;padding:8px 0}
+.sr label{font-size:15px;flex:1}
+.tg{width:48px;height:26px;background:rgba(255,255,255,.12);border-radius:13px;position:relative;cursor:pointer;transition:background .25s;flex-shrink:0}
+.tg.on{background:#43e97b}
+.tg::after{content:'';position:absolute;width:20px;height:20px;background:#fff;border-radius:50%;top:3px;left:3px;transition:left .25s}
+.tg.on::after{left:25px}
+.ob{display:flex;gap:6px;flex-wrap:wrap}
+.ob button{flex:1;min-width:55px;padding:9px 4px;border:2px solid rgba(255,255,255,.1);border-radius:10px;background:transparent;color:rgba(255,255,255,.7);font-family:inherit;font-weight:700;font-size:13px;cursor:pointer;transition:all .2s}
+.ob button.on{border-color:#43e97b;background:rgba(67,233,123,.12);color:#43e97b}
+.svb{background:linear-gradient(135deg,#43e97b,#38f9d7);color:#1a1a2e;border:none;border-radius:50px;padding:15px;font-size:17px;font-weight:900;font-family:inherit;cursor:pointer;margin-top:6px;width:100%}
+.pset{display:flex;gap:8px;justify-content:center}
+.pset input{width:46px;height:46px;text-align:center;font-size:22px;border-radius:10px;border:2px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:#fff;font-family:inherit}
+.pset input:focus{outline:none;border-color:#43e97b}
+
+/* COUNTDOWN */
+#cd{background:linear-gradient(135deg,#667eea,#764ba2)}
+.cdn{font-size:clamp(80px,25vh,220px);font-weight:900;opacity:0;animation:cpop .7s ease-out forwards}
+@keyframes cpop{0%{transform:scale(2.5);opacity:0}50%{opacity:1}100%{transform:scale(1);opacity:1}}
+
+/* PATTERN */
+#pat{background:#1a1a2e}
+#pcv{position:absolute;inset:0;width:100%;height:100%}
+.dots{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:10}
+.dots span{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.15);transition:all .3s}
+.dots span.now{background:#43e97b;transform:scale(1.3)}
+.dots span.did{background:rgba(255,255,255,.4)}
+#ebtn{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.08);border:none;color:rgba(255,255,255,.35);font-size:22px;width:44px;height:44px;border-radius:50%;cursor:pointer;z-index:10}
+#ebtn:active{background:rgba(255,255,255,.2)}
+#reo{position:absolute;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:20;flex-direction:column;cursor:pointer}
+#reo.on{display:flex}
+.retxt{font-size:clamp(32px,8vw,60px);font-weight:900;animation:rep 1s ease-in-out infinite}
+@keyframes rep{0%,100%{transform:scale(1);opacity:.8}50%{transform:scale(1.08);opacity:1}}
+
+/* BREATHE */
+#br{background:linear-gradient(135deg,#0c3547,#204051);gap:0;justify-content:center;align-items:center;flex-direction:column}
+.brc{width:min(120px,25vh);height:min(120px,25vh);border-radius:50%;background:radial-gradient(circle,#4facfe,#43e97b);box-shadow:0 0 50px rgba(79,172,254,.25);transition-property:transform,opacity,box-shadow;transition-timing-function:ease-in-out;margin-top:-12vh}
+.brc.in{transform:scale(2);opacity:1;box-shadow:0 0 80px rgba(79,172,254,.4)}
+.brc.out{transform:scale(1);opacity:.55;box-shadow:0 0 30px rgba(79,172,254,.15)}
+.brt{font-size:clamp(26px,5vw,42px);font-weight:700;color:rgba(255,255,255,.85);z-index:5;margin-top:60px}
+@media (orientation:landscape){
+  #br{gap:0;flex-direction:column;padding:0}
+  .brc{width:min(90px,28vh);height:min(90px,28vh);margin-top:-8vh}
+  .brc.in{transform:scale(1.8)}
+  .brt{font-size:clamp(22px,5vh,38px);margin-top:50px}
+}
+
+/* CELEBRATE */
+#cel{background:linear-gradient(135deg,#667eea,#764ba2);gap:12px}
+#cnf{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.cemoji{font-size:clamp(40px,12vh,100px);animation:boing 1s ease-in-out infinite;z-index:5}
+@keyframes boing{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-12px) rotate(5deg)}}
+.ctitle{font-size:clamp(24px,6vh,48px);font-weight:900;z-index:5;text-align:center}
+.csub{font-size:clamp(13px,2.5vw,20px);color:rgba(255,255,255,.75);z-index:5}
+.cbtns{display:flex;gap:12px;z-index:5;flex-wrap:wrap;justify-content:center}
+.cbtns button{border:none;border-radius:50px;padding:12px 30px;font-size:clamp(14px,2.5vw,18px);font-weight:700;font-family:inherit;cursor:pointer}
+.ba{background:linear-gradient(135deg,#43e97b,#38f9d7);color:#1a1a2e}
+.bd{background:rgba(255,255,255,.15);color:#fff}
+
+/* SUMMARY */
+#sum{background:linear-gradient(135deg,#1a1a2e,#16213e);gap:16px;padding:30px 20px;overflow-y:auto;justify-content:flex-start;padding-top:50px}
+.stitle{font-size:24px;font-weight:900;text-align:center}
+.sstats{background:rgba(255,255,255,.05);border-radius:14px;padding:16px;width:100%;max-width:400px}
+.srow{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px}
+.srow:last-child{border-bottom:none}
+.sval{font-weight:700;color:#43e97b}
+.snotes{width:100%;max-width:400px}
+.snotes h3{font-size:12px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;margin-top:12px}
+.snotes textarea{width:100%;min-height:90px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#fff;padding:12px;font-family:inherit;font-size:14px;resize:vertical}
+.snotes textarea:focus{outline:none;border-color:#43e97b}
+.ebtns{display:flex;gap:8px;margin-top:6px}
+.ebtns button{flex:1;padding:10px;border:2px solid rgba(255,255,255,.1);border-radius:10px;background:transparent;color:rgba(255,255,255,.6);font-family:inherit;font-weight:700;font-size:13px;cursor:pointer}
+.ebtns button.on{border-color:#43e97b;color:#43e97b;background:rgba(67,233,123,.1)}
+.sbtns{display:flex;gap:12px;width:100%;max-width:400px;margin-top:8px}
+.sbtns button{flex:1;border:none;border-radius:50px;padding:14px;font-size:16px;font-weight:700;font-family:inherit;cursor:pointer}
+.ssave{background:linear-gradient(135deg,#43e97b,#38f9d7);color:#1a1a2e}
+.sdone{background:rgba(255,255,255,.1);color:#fff}
+</style>
+</head>
+<body>
+
+<!-- 1: HOME -->
+<div class="scr on" id="home">
+  <div class="logo">EMI-Tech</div>
+  <div class="tagline">Eye Movement Intervention</div>
+  <button class="go-btn" onclick="showInfo()">Let's Go!</button>
+  <div class="plink" onclick="goPin()">Parent Settings</div>
+</div>
+
+<!-- 1B: INFO PREFACE -->
+<div class="scr" id="info">
+  <div style="max-width:500px;padding:30px;text-align:left;overflow-y:auto;max-height:100vh;">
+    <div style="text-align:center;font-size:28px;font-weight:900;margin-bottom:20px;">Before You Begin</div>
+    <div style="background:rgba(255,255,255,.06);border-radius:14px;padding:16px;margin-bottom:14px;">
+      <div style="font-size:15px;font-weight:700;color:#43e97b;margin-bottom:8px;">What This App Does</div>
+      <div style="font-size:14px;color:rgba(255,255,255,.8);line-height:1.6;">EMI-Tech guides your child's eyes through smooth, calming movement patterns based on Eye Movement Integration therapy. The movements help the brain de-escalate during moments of distress. Breathing exercises between patterns promote regulation.</div>
+    </div>
+    <div style="background:rgba(255,255,255,.06);border-radius:14px;padding:16px;margin-bottom:14px;">
+      <div style="font-size:15px;font-weight:700;color:#4facfe;margin-bottom:8px;">How Vibration Works</div>
+      <div style="font-size:14px;color:rgba(255,255,255,.8);line-height:1.6;">The full EMI-Tech device uses vibrating handles that pulse in sync with the visual patterns, providing bilateral tactile stimulation. As the arrow moves left, the left handle vibrates stronger. As it moves right, the right handle takes over. This multi-sensory approach (visual + tactile + audio) engages more neural pathways than visual alone.</div>
+    </div>
+    <div style="background:rgba(255,255,255,.06);border-radius:14px;padding:16px;margin-bottom:14px;" id="controllerInfo">
+      <div style="font-size:15px;font-weight:700;color:#f6d365;margin-bottom:8px;">Using a Game Controller (Recommended)</div>
+      <div style="font-size:14px;color:rgba(255,255,255,.8);line-height:1.6;">Connect a Bluetooth game controller (Xbox, PlayStation, etc.) to simulate the bilateral vibration. The controller's left and right rumble motors will pulse with the arrow movement, just like the real device's handles. Press any button on the controller to connect it.</div>
+      <div style="margin-top:10px;padding:10px;border-radius:8px;font-size:13px;font-weight:700;text-align:center;" id="gpStatus">No controller detected</div>
+    </div>
+    <div style="background:rgba(255,255,255,.06);border-radius:14px;padding:16px;margin-bottom:14px;">
+      <div style="font-size:15px;font-weight:700;color:#fda085;margin-bottom:8px;">Use Headphones</div>
+      <div style="font-size:14px;color:rgba(255,255,255,.8);line-height:1.6;">A calming tone pans from left ear to right ear following the arrow. With headphones, this creates an auditory version of the bilateral stimulation. This works on all devices including iPhone.</div>
+    </div>
+    <button style="background:linear-gradient(135deg,#43e97b,#38f9d7);color:#1a1a2e;border:none;border-radius:50px;padding:18px;font-size:20px;font-weight:900;font-family:inherit;cursor:pointer;width:100%;margin-top:8px;" onclick="goCountdown()">Start Session</button>
+    <div style="text-align:center;margin-top:12px;color:rgba(255,255,255,.3);font-size:12px;cursor:pointer;" onclick="go('home')">Back</div>
+  </div>
+</div>
+
+<!-- 2A: PIN -->
+<div class="scr" id="pin">
+  <div class="ptitle">Parent PIN</div>
+  <div class="pdots" id="pdo"><div class="pdot"></div><div class="pdot"></div><div class="pdot"></div><div class="pdot"></div></div>
+  <div class="perr" id="perr"></div>
+  <div class="npad">
+    <button onclick="pn(1)">1</button><button onclick="pn(2)">2</button><button onclick="pn(3)">3</button>
+    <button onclick="pn(4)">4</button><button onclick="pn(5)">5</button><button onclick="pn(6)">6</button>
+    <button onclick="pn(7)">7</button><button onclick="pn(8)">8</button><button onclick="pn(9)">9</button>
+    <button class="fn" onclick="pc()">CLR</button><button onclick="pn(0)">0</button><button class="fn" onclick="pd()">DEL</button>
+  </div>
+  <button class="blink" onclick="go('home')">Back</button>
+</div>
+
+<!-- 2B: SETTINGS -->
+<div class="scr" id="settings">
+  <div class="shd">Parent Settings</div>
+  <div class="sg"><h3>Patterns</h3>
+    <div class="sr"><label>Horizontal (left/right)</label><div class="tg on" data-k="patH" onclick="tgS(this)"></div></div>
+    <div class="sr"><label>Vertical (up/down)</label><div class="tg on" data-k="patV" onclick="tgS(this)"></div></div>
+    <div class="sr"><label>Circular</label><div class="tg on" data-k="patC" onclick="tgS(this)"></div></div>
+  </div>
+  <div class="sg"><h3>Arrow Speed</h3><div class="ob" data-g="speed"><button data-v="slow" onclick="pk(this)">Slow</button><button data-v="medium" class="on" onclick="pk(this)">Medium</button><button data-v="fast" onclick="pk(this)">Fast</button></div></div>
+  <div class="sg"><h3>Cycles Per Pattern</h3><div class="ob" data-g="cycles"><button data-v="3" onclick="pk(this)">3</button><button data-v="5" class="on" onclick="pk(this)">5</button><button data-v="8" onclick="pk(this)">8</button><button data-v="10" onclick="pk(this)">10</button></div></div>
+  <div class="sg"><h3>Arrow Shape</h3><div class="ob" data-g="shape"><button data-v="arrow" class="on" onclick="pk(this)">Arrow</button><button data-v="ball" onclick="pk(this)">Ball</button><button data-v="star" onclick="pk(this)">Star</button></div></div>
+  <div class="sg"><h3>Options</h3>
+    <div class="sr"><label>Sound</label><div class="tg on" data-k="sound" onclick="tgS(this)"></div></div>
+    <div class="sr"><label>Vibration</label><div class="tg on" data-k="vib" onclick="tgS(this)"></div></div>
+    <div class="sr"><label>Breathing between patterns</label><div class="tg on" data-k="breath" onclick="tgS(this)"></div></div>
+  </div>
+  <div class="sg"><h3>Breathing Pace</h3>
+    <div class="ob" data-g="brSec"><button data-v="3" onclick="pk(this)">3 sec</button><button data-v="4" class="on" onclick="pk(this)">4 sec</button><button data-v="5" onclick="pk(this)">5 sec</button></div>
+    <div style="margin-top:8px"><div class="ob" data-g="brCyc"><button data-v="2" onclick="pk(this)">2 breaths</button><button data-v="3" class="on" onclick="pk(this)">3 breaths</button><button data-v="4" onclick="pk(this)">4 breaths</button></div></div>
+  </div>
+  <div class="sg"><h3>Background</h3><div class="ob" data-g="theme"><button data-v="night" class="on" onclick="pk(this)">Night</button><button data-v="ocean" onclick="pk(this)">Ocean</button><button data-v="forest" onclick="pk(this)">Forest</button><button data-v="sunset" onclick="pk(this)">Sunset</button></div></div>
+  <div class="sg"><h3>PIN</h3><div class="pset"><input id="p1" type="number" min="0" max="9" value="1"><input id="p2" type="number" min="0" max="9" value="2"><input id="p3" type="number" min="0" max="9" value="3"><input id="p4" type="number" min="0" max="9" value="4"></div></div>
+  <button class="svb" onclick="saveSets()">Save and Go Back</button>
+</div>
+
+<!-- 3: COUNTDOWN -->
+<div class="scr" id="cd"><div class="cdn" id="cdn"></div></div>
+
+<!-- 4: PATTERN -->
+<div class="scr" id="pat">
+  <canvas id="pcv"></canvas>
+  <button id="ebtn" onclick="reOn()">👁</button>
+  <div class="dots" id="dots"></div>
+  <div id="reo" onclick="reOff()"><div class="retxt">👀 Eyes here!</div></div>
+</div>
+
+<!-- 5: BREATHE -->
+<div class="scr" id="br">
+  <div class="brc" id="brc"></div>
+  <div class="brt" id="brt">Breathe in...</div>
+</div>
+
+<!-- 6: CELEBRATE -->
+<div class="scr" id="cel">
+  <canvas id="cnf"></canvas>
+  <div class="cemoji">🌟</div>
+  <div class="ctitle">Great Job!</div>
+  <div class="csub">You did amazing!</div>
+  <div class="cbtns">
+    <button class="ba" onclick="goCountdown()">Again!</button>
+    <button class="bd" onclick="goSummary()">All Done</button>
+  </div>
+</div>
+
+<!-- 7: SUMMARY -->
+<div class="scr" id="sum">
+  <div class="stitle">Session Complete</div>
+  <div class="sstats" id="sstats"></div>
+  <div class="snotes">
+    <h3>Observations</h3>
+    <textarea id="snta" placeholder="How did your child respond? Which patterns worked best? Anything you noticed?"></textarea>
+    <h3>Engagement Level</h3>
+    <div class="ebtns" id="ebtns">
+      <button data-v="low" onclick="pke(this)">Low</button>
+      <button data-v="medium" onclick="pke(this)">Medium</button>
+      <button data-v="high" onclick="pke(this)">High</button>
+    </div>
+  </div>
+  <div class="sbtns">
+    <button class="ssave" id="savBtn" onclick="saveSess()">Save Notes</button>
+    <button class="sdone" onclick="go('home')">Done</button>
+  </div>
+</div>
+
+<script>
+/* ===== CONFIG ===== */
+const K='emi-v2';
+let C={pin:'1234',patH:true,patV:true,patC:true,speed:'medium',cycles:5,shape:'arrow',sound:true,vib:true,breath:true,brSec:4,brCyc:3,theme:'night'};
+try{const s=JSON.parse(localStorage.getItem(K));if(s)Object.assign(C,s)}catch(e){}
+function persist(){localStorage.setItem(K,JSON.stringify(C))}
+
+/* ===== NAVIGATION ===== */
+function go(id){document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));document.getElementById(id).classList.add('on');if(id==='home'){cancelAnimationFrame(raf);cancelAnimationFrame(crf);stopPanTone()}}
+
+/* ===== AUDIO ===== */
+let ax;
+function ac(){if(!ax)ax=new(window.AudioContext||window.webkitAudioContext)();if(ax.state==='suspended')ax.resume();return ax}
+
+/* Stereo panning tone: pan goes from -1 (left) to 1 (right) */
+let panOsc=null,panGain=null,panNode=null;
+function startPanTone(){
+  if(!C.sound)return;
+  try{
+    const c=ac();
+    panOsc=c.createOscillator();
+    panGain=c.createGain();
+    panNode=c.createStereoPanner();
+    panOsc.type='sine';
+    panOsc.frequency.value=220;
+    panGain.gain.value=0.06;
+    panOsc.connect(panGain);
+    panGain.connect(panNode);
+    panNode.connect(c.destination);
+    panNode.pan.value=0;
+    panOsc.start();
+  }catch(e){}
+}
+function updatePan(val){
+  /* val should be -1 (full left) to 1 (full right) */
+  if(panNode)try{panNode.pan.value=Math.max(-1,Math.min(1,val))}catch(e){}
+}
+function stopPanTone(){
+  try{if(panOsc){panOsc.stop();panOsc=null;panGain=null;panNode=null}}catch(e){}
+}
+
+function tn(f,d,v=.1){if(!C.sound)return;try{const c=ac(),o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(v,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+d);o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+d)}catch(e){}}
+function chime(){tn(523,.25);setTimeout(()=>tn(659,.25),120);setTimeout(()=>tn(784,.35),240)}
+function cdtn(){tn(440,.2,.08)}
+function celSnd(){[523,659,784,1047].forEach((f,i)=>setTimeout(()=>tn(f,.25,.08),i*120))}
+function vb(ms){if(C.vib&&navigator.vibrate)navigator.vibrate(ms)}
+
+/* Force audio init on first touch anywhere (iOS Safari requirement) */
+document.addEventListener('touchstart',function initAudio(){try{ac();const o=ac().createOscillator();const g=ac().createGain();g.gain.value=0;o.connect(g);g.connect(ac().destination);o.start();o.stop(ac().currentTime+.01)}catch(e){}document.removeEventListener('touchstart',initAudio)},{once:true});
+document.addEventListener('click',function initAudio2(){try{ac()}catch(e){}document.removeEventListener('click',initAudio2)},{once:true});
+
+/* ===== GAMEPAD VIBRATION ===== */
+let gpConnected=false;
+function getGP(){
+  const gps=navigator.getGamepads?navigator.getGamepads():[];
+  for(let i=0;i<gps.length;i++){if(gps[i])return gps[i]}
+  return null;
+}
+
+function gpVibrate(leftStrong,rightStrong){
+  const gp=getGP();
+  if(!gp||!C.vib)return;
+  try{
+    if(gp.vibrationActuator){
+      /* Xbox/PS controllers: strongMagnitude = heavy left motor, weakMagnitude = light right motor.
+         The strong motor is physically more powerful, so we scale it DOWN and boost the weak side UP
+         to make them feel balanced. */
+      gp.vibrationActuator.playEffect('dual-rumble',{
+        startDelay:0,duration:200,
+        strongMagnitude:Math.min(1,Math.max(0,leftStrong*0.7)),
+        weakMagnitude:Math.min(1,Math.max(0,rightStrong))
+      });
+    } else if(gp.hapticActuators&&gp.hapticActuators.length){
+      gp.hapticActuators[0].pulse(Math.max(leftStrong,rightStrong),200);
+    }
+  }catch(e){}
+}
+
+window.addEventListener('gamepadconnected',function(e){
+  gpConnected=true;
+  const el=document.getElementById('gpStatus');
+  if(el){el.textContent='Controller connected: '+e.gamepad.id;el.style.background='rgba(67,233,123,.15)';el.style.color='#43e97b'}
+});
+window.addEventListener('gamepaddisconnected',function(){
+  gpConnected=false;
+  const el=document.getElementById('gpStatus');
+  if(el){el.textContent='Controller disconnected';el.style.background='';el.style.color=''}
+});
+
+function showInfo(){
+  /* Update controller status on info screen */
+  const gp=getGP();
+  const el=document.getElementById('gpStatus');
+  if(gp&&el){el.textContent='Controller connected: '+gp.id;el.style.background='rgba(67,233,123,.15)';el.style.color='#43e97b'}
+  else if(el){el.textContent='No controller detected. Connect via Bluetooth and press any button.';el.style.background='rgba(255,255,255,.05)';el.style.color='rgba(255,255,255,.4)'}
+  go('info');
+}
+
+/* ===== THEMES ===== */
+const TH={
+night:{bg1:'#1a1a2e',bg2:'#16213e',col:'#4facfe',glow:'rgba(79,172,254,.3)',trail:'rgba(79,172,254,.06)'},
+ocean:{bg1:'#0a2342',bg2:'#1b4965',col:'#38f9d7',glow:'rgba(56,249,215,.3)',trail:'rgba(56,249,215,.06)'},
+forest:{bg1:'#1b2a1b',bg2:'#2d4a2d',col:'#43e97b',glow:'rgba(67,233,123,.3)',trail:'rgba(67,233,123,.06)'},
+sunset:{bg1:'#2d1b2e',bg2:'#4a2d3a',col:'#f6d365',glow:'rgba(246,211,101,.3)',trail:'rgba(246,211,101,.06)'}
+};
+
+/* ===== PIN ===== */
+let pe='';
+function goPin(){pe='';upd();document.getElementById('perr').textContent='';go('pin')}
+function pn(n){if(pe.length>=4)return;pe+=''+n;upd();if(pe.length===4){if(pe===C.pin){pe='';openSets()}else{document.getElementById('perr').textContent='Wrong PIN';vb(200);document.querySelectorAll('.pdot').forEach(d=>d.classList.add('bad'));setTimeout(()=>{pe='';upd();document.getElementById('perr').textContent='';document.querySelectorAll('.pdot').forEach(d=>d.classList.remove('bad'))},800)}}}
+function pc(){pe='';upd()}
+function pd(){pe=pe.slice(0,-1);upd()}
+function upd(){document.querySelectorAll('#pdo .pdot').forEach((d,i)=>{d.classList.toggle('on',i<pe.length);d.classList.remove('bad')})}
+
+/* ===== SETTINGS ===== */
+function openSets(){
+document.querySelectorAll('.tg[data-k]').forEach(t=>t.classList.toggle('on',C[t.dataset.k]));
+document.querySelectorAll('.ob').forEach(g=>{const k=g.dataset.g;g.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.v===''+C[k]))});
+[1,2,3,4].forEach(i=>document.getElementById('p'+i).value=C.pin[i-1]||'0');
+go('settings');
+}
+function tgS(el){
+const k=el.dataset.k;
+if(['patH','patV','patC'].includes(k)&&el.classList.contains('on')){
+  if(!['patH','patV','patC'].filter(x=>x!==k).some(x=>C[x]))return;
+}
+el.classList.toggle('on');C[k]=el.classList.contains('on');
+}
+function pk(b){b.parentElement.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');const g=b.parentElement.dataset.g,v=b.dataset.v;C[g]=['cycles','brSec','brCyc'].includes(g)?parseInt(v):v}
+function saveSets(){C.pin=[1,2,3,4].map(i=>{let v=parseInt(document.getElementById('p'+i).value);return isNaN(v)?0:Math.min(9,Math.max(0,v))}).join('');persist();go('home')}
+
+/* ===== COUNTDOWN ===== */
+function goCountdown(){
+if(C.sound)try{ac()}catch(e){}
+try{const e=document.documentElement;if(e.requestFullscreen)e.requestFullscreen();else if(e.webkitRequestFullscreen)e.webkitRequestFullscreen()}catch(e){}
+sStart=Date.now();tCyc=0;
+go('cd');
+let n=3;const el=document.getElementById('cdn');
+function tick(){
+  if(n<=0){beginSess();return}
+  el.textContent=n;el.style.animation='none';el.offsetHeight;el.style.animation='cpop .7s ease-out forwards';
+  cdtn();vb(80);n--;setTimeout(tick,1000);
+}
+tick();
+}
+
+/* ===== SESSION ===== */
+let raf=0,crf=0;
+let pts=[],pi=0,cy=0,pv=1,tm=0,trail=[];
+let cv,cx,W,H,lastF=0,lastVib=0;
+let sStart=0,tCyc=0;
+const SPD={slow:.0005,medium:.001,fast:.0018};
+
+function getPats(){const p=[];if(C.patH)p.push('h');if(C.patV)p.push('v');if(C.patC)p.push('c');return p.length?p:['h']}
+
+function beginSess(){pts=getPats();pi=0;mkDots();startPat()}
+
+function mkDots(){const el=document.getElementById('dots');el.innerHTML='';pts.forEach((_,i)=>{const s=document.createElement('span');if(i===0)s.className='now';el.appendChild(s)})}
+function udots(){document.querySelectorAll('#dots span').forEach((d,i)=>{d.className=i<pi?'did':i===pi?'now':''})}
+
+function startPat(){
+cv=document.getElementById('pcv');cx=cv.getContext('2d');
+rsz();window.onresize=rsz;
+tm=0;cy=0;pv=1;trail=[];
+const th=TH[C.theme]||TH.night;
+document.getElementById('pat').style.background='linear-gradient(135deg,'+th.bg1+','+th.bg2+')';
+go('pat');chime();vb(100);udots();
+startPanTone();
+lastF=performance.now();cancelAnimationFrame(raf);raf=requestAnimationFrame(draw);
+}
+
+function rsz(){if(cv){cv.width=W=window.innerWidth;cv.height=H=window.innerHeight}}
+
+function draw(now){
+const dt=now-lastF;lastF=now;
+const spd=SPD[C.speed]||SPD.medium;
+tm+=dt*spd;
+const th=TH[C.theme]||TH.night;
+const p=pts[pi],mg=70;
+
+cx.fillStyle=th.bg1;cx.globalAlpha=.12;cx.fillRect(0,0,W,H);cx.globalAlpha=1;
+
+let x,y,a=0;
+if(p==='h'){
+  const r=Math.sin(tm);x=mg+(W-mg*2)*((r+1)/2);y=H/2;a=Math.cos(tm)>0?0:Math.PI;
+  updatePan(r);
+  const d=Math.cos(tm)>0?1:-1;if(d!==pv&&d===1){cy++;tCyc++;vb(50)}pv=d;
+} else if(p==='v'){
+  x=W/2;const r=Math.sin(tm);y=mg+(H-mg*2)*((r+1)/2);a=Math.cos(tm)>0?Math.PI/2:-Math.PI/2;
+  updatePan(0);
+  const d=Math.cos(tm)>0?1:-1;if(d!==pv&&d===1){cy++;tCyc++;vb(50)}pv=d;
+} else if(p==='c'){
+  const r=Math.min(W,H)/2-mg;x=W/2+r*Math.cos(tm);y=H/2+r*Math.sin(tm);a=tm+Math.PI/2;
+  updatePan(Math.cos(tm));
+  const fc=Math.floor(tm/(Math.PI*2));if(fc>cy){cy=fc;tCyc++;vb(50)}
+}
+
+trail.push({x,y});if(trail.length>35)trail.shift();
+trail.forEach((pt,i)=>{
+  const al=i/trail.length,sz=24*(al*.5+.5);
+  cx.beginPath();cx.arc(pt.x,pt.y,sz,0,Math.PI*2);cx.fillStyle=th.trail;cx.globalAlpha=al*.5;cx.fill();
+});
+cx.globalAlpha=1;
+
+const grd=cx.createRadialGradient(x,y,0,x,y,70);
+grd.addColorStop(0,th.glow);grd.addColorStop(1,'transparent');
+cx.fillStyle=grd;cx.fillRect(x-70,y-70,140,140);
+
+if(C.shape==='ball'){cx.beginPath();cx.arc(x,y,28,0,Math.PI*2);const g=cx.createRadialGradient(x-8,y-8,4,x,y,28);g.addColorStop(0,'#fff');g.addColorStop(.3,th.col);g.addColorStop(1,th.col+'88');cx.fillStyle=g;cx.fill()}
+else if(C.shape==='star'){cx.save();cx.translate(x,y);cx.rotate(a);cx.beginPath();for(let i=0;i<5;i++){const ag=i*Math.PI*2/5-Math.PI/2;cx.lineTo(Math.cos(ag)*32,Math.sin(ag)*32);cx.lineTo(Math.cos(ag+Math.PI/5)*14,Math.sin(ag+Math.PI/5)*14)}cx.closePath();cx.fillStyle=th.col;cx.fill();cx.strokeStyle='rgba(255,255,255,.4)';cx.lineWidth=2;cx.stroke();cx.restore()}
+else{cx.save();cx.translate(x,y);cx.rotate(a);const s=44;cx.beginPath();cx.moveTo(-s*.75,-s*.18);cx.lineTo(s*.15,-s*.18);cx.lineTo(s*.15,-s*.42);cx.lineTo(s*.75,0);cx.lineTo(s*.15,s*.42);cx.lineTo(s*.15,s*.18);cx.lineTo(-s*.75,s*.18);cx.closePath();cx.fillStyle=th.col;cx.fill();cx.strokeStyle='rgba(255,255,255,.4)';cx.lineWidth=2;cx.lineJoin='round';cx.stroke();cx.restore()}
+
+/* Traveling vibration: smooth bilateral crossfade */
+if(C.vib){
+  let leftI=0,rightI=0;
+  if(p==='h'){
+    /* pos: 0 = full left, 1 = full right */
+    const pos=(x-mg)/(W-mg*2);
+    /* Cosine crossfade with strong edge contrast */
+    const L=Math.cos(pos*Math.PI/2);
+    const R=Math.sin(pos*Math.PI/2);
+    /* Edges hit 1.0, center drops to 0.25 — real bilateral difference */
+    leftI=L*L;   /* squared curve = sharper falloff from edges */
+    rightI=R*R;
+    /* Ensure minimum so it's not dead silent in center */
+    leftI=Math.max(0.08,leftI);
+    rightI=Math.max(0.08,rightI);
+  } else if(p==='v'){
+    /* Vertical: both motors equal, intensity follows y position */
+    /* top = light (0.1), bottom = strong (0.9) */
+    const yPos=(y-mg)/(H-mg*2); /* 0=top, 1=bottom */
+    const intensity=0.1+yPos*0.8;
+    leftI=intensity;rightI=intensity;
+  } else if(p==='c'){
+    /* Circular: left/right from x, overall intensity from y */
+    const xPos=(Math.cos(tm)+1)/2; /* 0=left, 1=right */
+    const yPos=(Math.sin(tm)+1)/2; /* 0=top, 1=bottom */
+    const L=Math.cos(xPos*Math.PI/2);
+    const R=Math.sin(xPos*Math.PI/2);
+    leftI=L*L;
+    rightI=R*R;
+    /* Scale both by y-position: light at top, strong at bottom */
+    const yScale=0.15+yPos*0.85;
+    leftI=Math.max(0.05,leftI*yScale);
+    rightI=Math.max(0.05,rightI*yScale);
+  }
+  /* Phone vibration (Android only) */
+  if(navigator.vibrate&&!gpConnected&&now-lastVib>100){navigator.vibrate(Math.round(Math.max(leftI,rightI)*50));lastVib=now}
+  /* Gamepad bilateral vibration: 200ms pulses every 180ms for smooth overlap */
+  if(gpConnected&&now-lastVib>180){gpVibrate(leftI,rightI);lastVib=now}
+}
+
+if(cy>=C.cycles){nxtPat();return}
+raf=requestAnimationFrame(draw);
+}
+
+/* ===== RE-ENGAGE ===== */
+function reOn(){document.getElementById('reo').classList.add('on');vb(300);tn(440,.4,.12);setTimeout(reOff,5000)}
+function reOff(){document.getElementById('reo').classList.remove('on')}
+
+/* ===== NEXT PATTERN ===== */
+function nxtPat(){
+cancelAnimationFrame(raf);stopPanTone();trail=[];pi++;tm=0;cy=0;pv=1;
+if(pi>=pts.length){goCeleb();return}
+if(C.breath){doBr(()=>startPat())}else{setTimeout(startPat,800)}
+}
+
+/* ===== BREATHING BREAK ===== */
+let brVibRAF=null;
+function doBr(cb){
+go('br');
+const c=document.getElementById('brc'),t=document.getElementById('brt');
+let n=0;const sec=C.brSec*1000;
+c.style.transitionDuration=C.brSec+'s';
+
+function brVibRamp(dir,dur){
+  /* dir: 1 = ramp up (breathe in), -1 = ramp down (breathe out) */
+  const start=performance.now();
+  cancelAnimationFrame(brVibRAF);
+  function tick(){
+    const elapsed=performance.now()-start;
+    const pct=Math.min(1,elapsed/dur);
+    const intensity=dir===1?pct:(1-pct);
+    /* Both motors equal, smooth ramp 0.05 to 0.8 */
+    const level=0.05+intensity*0.75;
+    if(gpConnected){gpVibrate(level,level)}
+    if(pct<1)brVibRAF=requestAnimationFrame(tick);
+  }
+  if(C.vib)tick();
+}
+
+function inn(){if(n>=C.brCyc){cancelAnimationFrame(brVibRAF);if(gpConnected)gpVibrate(0,0);cb();return}t.textContent='Breathe in...';c.className='brc in';tn(396,1.2,'sine',.05);brVibRamp(1,sec);setTimeout(out,sec)}
+function out(){t.textContent='Breathe out...';c.className='brc out';tn(264,1.2,'sine',.05);brVibRamp(-1,sec);n++;setTimeout(inn,sec)}
+c.className='brc';setTimeout(inn,500);
+}
+
+/* ===== CELEBRATION ===== */
+let conf=[];
+function goCeleb(){
+go('cel');celSnd();vb([100,50,100,50,200]);
+const cv=document.getElementById('cnf'),cx=cv.getContext('2d');
+cv.width=window.innerWidth;cv.height=window.innerHeight;
+conf=[];
+const cols=['#43e97b','#4facfe','#f6d365','#fda085','#e94560','#764ba2','#38f9d7','#ff6b6b'];
+for(let i=0;i<120;i++)conf.push({x:Math.random()*cv.width,y:Math.random()*cv.height-cv.height,w:Math.random()*10+4,h:Math.random()*6+3,c:cols[Math.floor(Math.random()*cols.length)],vy:Math.random()*3+1.5,vx:(Math.random()-.5)*2,r:Math.random()*360,rv:Math.random()*5-2.5});
+cancelAnimationFrame(crf);
+function dc(){cx.clearRect(0,0,cv.width,cv.height);conf.forEach(p=>{p.y+=p.vy;p.x+=p.vx;p.r+=p.rv;if(p.y>cv.height+20)p.y=-20;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r*Math.PI/180);cx.fillStyle=p.c;cx.fillRect(-p.w/2,-p.h/2,p.w,p.h);cx.restore()});crf=requestAnimationFrame(dc)}
+dc();
+}
+
+/* ===== SUMMARY ===== */
+let eng='';
+function goSummary(){
+cancelAnimationFrame(crf);
+try{if(document.exitFullscreen)document.exitFullscreen();else if(document.webkitExitFullscreen)document.webkitExitFullscreen()}catch(e){}
+const el=Math.round((Date.now()-sStart)/1000),m=Math.floor(el/60),s=el%60;
+document.getElementById('sstats').innerHTML=
+'<div class="srow"><span>Total time</span><span class="sval">'+m+'m '+s+'s</span></div>'+
+'<div class="srow"><span>Patterns completed</span><span class="sval">'+pts.length+'</span></div>'+
+'<div class="srow"><span>Total cycles</span><span class="sval">'+tCyc+'</span></div>'+
+'<div class="srow"><span>Breathing breaks</span><span class="sval">'+(C.breath?Math.max(0,pts.length-1):0)+'</span></div>';
+document.getElementById('snta').value='';eng='';
+document.querySelectorAll('#ebtns button').forEach(b=>b.classList.remove('on'));
+go('sum');
+}
+
+function pke(b){document.querySelectorAll('#ebtns button').forEach(x=>x.classList.remove('on'));b.classList.add('on');eng=b.dataset.v}
+
+function saveSess(){
+const entry={date:new Date().toISOString(),dur:Math.round((Date.now()-sStart)/1000),pats:pts.length,cycles:tCyc,eng:eng,notes:document.getElementById('snta').value,cfg:{speed:C.speed,shape:C.shape,theme:C.theme}};
+let h=[];try{h=JSON.parse(localStorage.getItem('emi-hist'))||[]}catch(e){}
+h.unshift(entry);if(h.length>50)h=h.slice(0,50);
+localStorage.setItem('emi-hist',JSON.stringify(h));
+const b=document.getElementById('savBtn');b.textContent='Saved!';setTimeout(()=>b.textContent='Save Notes',1500);
+}
+
+/* ===== INIT ===== */
+document.querySelectorAll('.tg[data-k]').forEach(t=>t.classList.toggle('on',C[t.dataset.k]));
+</script>
+</body>
+</html>

@@ -98,7 +98,7 @@
 
 <div class="header">
   <h1>🐕 Big Dog — Command Center</h1>
-  <div class="subtitle">Quantum Neuroshift · SafeTube · Visual Timer</div>
+  <div class="subtitle">Quantum Neuroshift · EMI-Tech · Visual Timer</div>
   <div class="date" id="currentDate"></div>
 </div>
 
@@ -111,7 +111,7 @@
   <div class="icon">🚨</div>
   <div class="content">
     <h3>ARI Grant Pre-Application Due May 18</h3>
-    <p>Submit to research@autism.org — Word doc is in your email, fill in OT + teacher names</p>
+    <p>Submit to research@autism.org — Get Sean's credentials Friday, fill in Mitchell's name, then submit Monday</p>
   </div>
   <div class="countdown" id="ariCountdown"></div>
 </div>
@@ -145,21 +145,24 @@
         </div>
         <div class="add-task-bar"><input type="text" placeholder="Add a task..." onkeydown="if(event.key==='Enter')addTaskToSection(this,'emi-grants')"><button onclick="addTaskToSection(this.previousElementSibling,'emi-grants')">+ Add</button></div>
       </div>
-      <div class="task-section"><h4>✅ Web Prototype (DONE)</h4>
+      <div class="task-section"><h4>✅ Web Prototype v10 (Orb + Breathing Intro)</h4>
         <div class="task-list" id="tasks-emi-web">
-        <div class="task-item checked"><input type="checkbox" data-key="emi-w1" checked><span class="task-label">All 8 screens built (Home, Info, PIN, Settings, Countdown, Pattern, Breathing, Celebration, Summary)</span><span class="task-due done">Done ✓</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
-        <div class="task-item checked"><input type="checkbox" data-key="emi-w2" checked><span class="task-label">Horizontal, vertical, circular patterns</span><span class="task-due done">Done ✓</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
-        <div class="task-item checked"><input type="checkbox" data-key="emi-w3" checked><span class="task-label">Stereo audio panning (follows arrow)</span><span class="task-due done">Done ✓</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item checked"><input type="checkbox" data-key="emi-w1" checked><span class="task-label">All screens built (Home, Info, PIN, Settings, Countdown, Breathing Intro, Pattern, Breathing, Celebration, Summary)</span><span class="task-due done">Done ✓</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item checked"><input type="checkbox" data-key="emi-w2" checked><span class="task-label">Pulsating orb replaces arrow (more calming for kids in distress)</span><span class="task-due done">Done ✓</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item checked"><input type="checkbox" data-key="emi-w2b" checked><span class="task-label">Breathing intro screen before patterns start</span><span class="task-due done">Done ✓</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item checked"><input type="checkbox" data-key="emi-w2c" checked><span class="task-label">"breathe naturally" hint — large, pulsing, catches upset eyes</span><span class="task-due done">Done ✓</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item checked"><input type="checkbox" data-key="emi-w2d" checked><span class="task-label">Smooth ease-in transition (orb starts center, expands to full range)</span><span class="task-due done">Done ✓</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item checked"><input type="checkbox" data-key="emi-w3" checked><span class="task-label">Stereo audio panning (follows orb)</span><span class="task-due done">Done ✓</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
         <div class="task-item checked"><input type="checkbox" data-key="emi-w4" checked><span class="task-label">Xbox/PS controller bilateral vibration</span><span class="task-due done">Done ✓</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
         <div class="task-item checked"><input type="checkbox" data-key="emi-w5" checked><span class="task-label">Breathing exercises with vibration ramp</span><span class="task-due done">Done ✓</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
         <div class="task-item checked"><input type="checkbox" data-key="emi-w6" checked><span class="task-label">Parent PIN lock + settings</span><span class="task-due done">Done ✓</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
-        <div class="task-item checked"><input type="checkbox" data-key="emi-w7" checked><span class="task-label">4 themes, 3 arrow shapes, adjustable speed/cycles</span><span class="task-due done">Done ✓</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item checked"><input type="checkbox" data-key="emi-w7" checked><span class="task-label">4 themes, 3 patterns (H/V/circular), adjustable speed/cycles</span><span class="task-due done">Done ✓</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
         <div class="task-item checked"><input type="checkbox" data-key="emi-w8" checked><span class="task-label">Password-protected live demo (GitHub Pages)</span><span class="task-due done">Done ✓</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
         </div>
       </div>
-      <div class="task-section"><h4>📱 Native iOS App (Swift)</h4>
+      <div class="task-section"><h4>📱 Native iOS App (Swift — Updated to Match v10)</h4>
         <div class="task-list" id="tasks-emi-swift">
-        <div class="task-item checked"><input type="checkbox" data-key="emi-s1" checked><span class="task-label">Full SwiftUI app written (14 files, 1900 lines)</span><span class="task-due done">Done ✓</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item checked"><input type="checkbox" data-key="emi-s1" checked><span class="task-label">Full SwiftUI app with OrbIntroView, PatternView (orb), BreathingView (matching gradient)</span><span class="task-due done">Done ✓</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
         <div class="task-item checked"><input type="checkbox" data-key="emi-s2" checked><span class="task-label">CoreHaptics engine (iPhone Taptic vibration)</span><span class="task-due done">Done ✓</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
         <div class="task-item checked"><input type="checkbox" data-key="emi-s3" checked><span class="task-label">CoreBluetooth (connects to vibrating case)</span><span class="task-due done">Done ✓</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
         <div class="task-item checked"><input type="checkbox" data-key="emi-s4" checked><span class="task-label">Stereo audio panning (AVAudioEngine)</span><span class="task-due done">Done ✓</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
@@ -181,11 +184,11 @@
       </div>
       <div class="task-section"><h4>👥 Advisors</h4>
         <div class="task-list" id="tasks-emi-advisors">
-        <div class="task-item checked"><input type="checkbox" data-key="emi-a1" checked><span class="task-label">Text OT Lisa for name + credentials</span><span class="task-due done">Done ✓</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
-        <div class="task-item checked"><input type="checkbox" data-key="emi-a2" checked><span class="task-label">Text teacher Sean for name + credentials</span><span class="task-due done">Done ✓</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
-        <div class="task-item"><input type="checkbox" data-key="emi-a3"><span class="task-label">Wait for Lisa/Sean/Mitchell responses</span><span class="task-due urgent">Before May 18</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
-        <div class="task-item"><input type="checkbox" data-key="emi-a4"><span class="task-label">Fill advisor names into ARI pre-app</span><span class="task-due urgent">Before May 18</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
-        <div class="task-item"><input type="checkbox" data-key="emi-a5"><span class="task-label">Share prototype with OT/teacher for feedback</span><span class="task-due soon">After responses</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item checked"><input type="checkbox" data-key="emi-a1" checked><span class="task-label">Lisa Bailey — OT, filled into pre-app ✅</span><span class="task-due done">Done ✓</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="emi-a2"><span class="task-label">Sean Salazar — K-12 teacher, get credentials Friday</span><span class="task-due urgent">Fri May 9</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="emi-a3"><span class="task-label">Mitchell (UNLV, brother-in-law) — said YES, get full name + title at family function</span><span class="task-due urgent">This weekend</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="emi-a4"><span class="task-label">Fill Sean + Mitchell into ARI pre-app → submit Monday</span><span class="task-due urgent">Mon May 12</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
+        <div class="task-item"><input type="checkbox" data-key="emi-a5"><span class="task-label">Share prototype with advisors for feedback</span><span class="task-due soon">After submit</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
         <div class="task-item"><input type="checkbox" data-key="emi-a6"><span class="task-label">🎯 TEST WITH LIAM (calm moment)</span><span class="task-due soon">This week</span><button class="delete-task" onclick="deleteTask(this)">✕</button></div>
         </div>
         <div class="add-task-bar"><input type="text" placeholder="Add a task..." onkeydown="if(event.key==='Enter')addTaskToSection(this,'emi-advisors')"><button onclick="addTaskToSection(this.previousElementSibling,'emi-advisors')">+ Add</button></div>
@@ -252,10 +255,11 @@
 
 <div class="contacts">
   <h2>👥 Key Contacts</h2>
-  <div class="contact-item"><div class="name">Occupational Therapist</div><div class="role">Clinical Advisor — EMI-Tech</div><div class="detail">Status: Said YES ✅ — Get credentials for grant</div></div>
-  <div class="contact-item"><div class="name">Special Needs Teacher</div><div class="role">Educational Advisor — EMI-Tech</div><div class="detail">Status: Said YES ✅ — Leaving district end of year, still valid as advisor</div></div>
-  <div class="contact-item"><div class="name">Gary (Agent)</div><div class="role">Stocks, Horoscopes, Backup for Projects</div><div class="detail">Needs to: Pull bigdog-projects repo + read HANDOFF.md</div></div>
-  <div class="contact-item"><div class="name">Obsidian Slug (Agent)</div><div class="role">Primary Project Support</div><div class="detail">⚠️ Access may end May 31 — all docs backed up to GitHub + email</div></div>
+  <div class="contact-item"><div class="name">Lisa Bailey — OT</div><div class="role">Clinical Advisor — EMI-Tech</div><div class="detail">Status: ✅ Filled into ARI pre-app</div></div>
+  <div class="contact-item"><div class="name">Sean Salazar — K-12 Teacher</div><div class="role">Educational Advisor — EMI-Tech</div><div class="detail">Status: Meeting Friday — get full credentials</div></div>
+  <div class="contact-item"><div class="name">Mitchell — UNLV (brother-in-law)</div><div class="role">Academic Advisor — EMI-Tech</div><div class="detail">Status: Said YES ✅ — Get full name + title this weekend</div></div>
+  <div class="contact-item"><div class="name">Gary (Agent)</div><div class="role">Stocks, Horoscopes, Backup for Projects</div><div class="detail">Needs to: Read Soul Map critique + fix git push cron</div></div>
+  <div class="contact-item"><div class="name">Obsidian Slug (Agent)</div><div class="role">Primary Project Support</div><div class="detail">⚠️ Access may end May 31 — all docs backed up to GitHub + email + Drive</div></div>
 </div>
 
 <div class="notes">
@@ -315,17 +319,16 @@ const state=loadState();
 
 // Default steps (used on first load or if no saved steps)
 const defaultSteps=[
-  {id:'step-1',text:'<strong>Wait for Lisa/Sean/Mitchell responses</strong>',detail:'Need their full names + credentials for the ARI pre-app'},
-  {id:'step-2',text:'<strong>Fill advisor names into ARI pre-application</strong>',detail:'Lisa Bailey is filled in. Sean certification pending. Open updated doc from email.'},
-  {id:'step-3',text:'<strong>Email finished pre-app to: research@autism.org</strong>',detail:'Subject: "Letter of Interest — Technology-Assisted EMI for Autism De-Escalation"'},
-  {id:'step-4',text:'<strong>Send NEXT for AUTISM inquiry</strong>',detail:'Draft is in your email. Copy-paste and send to: grants@nextforautism.org'},
-  {id:'step-5',text:'<strong>Set up Xcode on your Mac</strong>',detail:'Step-by-step guide in your email: "XCODE SETUP GUIDE". Follow it exactly. Swift source in GitHub repo.'},
-  {id:'step-6',text:'<strong>Compile and test iOS app on iPhone</strong>',detail:'Plug iPhone into Mac, select it in Xcode, hit Play. Test haptics, audio, all screens.'},
-  {id:'step-7',text:'<strong>Test web prototype with Liam (calm moment)</strong>',detail:'Use headphones. Open HTML file or bmcgarybot.github.io/emi-tech-prototype (password: QuantumNeuroshift2026!)'},
-  {id:'step-8',text:'<strong>Share prototype link with Sean for feedback</strong>',detail:'Send him the password-protected link + password. Ask what he thinks clinically.'},
-  {id:'step-9',text:'<strong>Tell Gary to pull the repo</strong>',detail:'Send the MESSAGE-FOR-GARY-SWIFT.md content. He needs to clone the private repo and read STATUS.md.'},
-  {id:'step-10',text:'<strong>Form Quantum Neuroshift LLC in June ($50)</strong>',detail:'Arizona Corporation Commission online. Guide in your email: "Arizona LLC Formation Guide". Needed for SBIR grant.'},
-  {id:'step-11',text:'<strong>Register on SAM.gov in June</strong>',detail:'sam.gov — takes 2-4 weeks to process. Required for SBIR. Start as soon as LLC is formed.'},
+  {id:'step-1',text:'<strong>Friday: Get Sean\'s full credentials</strong>',detail:'Full name, title, school/district. Using his K-12 background for ARI pre-app.'},
+  {id:'step-2',text:'<strong>Weekend: Get Mitchell\'s full name + UNLV title</strong>',detail:'Meeting at family function. Need name + academic title/department.'},
+  {id:'step-3',text:'<strong>Sunday/Monday: Fill Sean + Mitchell into ARI pre-app</strong>',detail:'Updated doc is in your email. Lisa Bailey already filled in.'},
+  {id:'step-4',text:'<strong>Monday: Submit ARI pre-app to research@autism.org</strong>',detail:'Subject: "Letter of Interest — Technology-Assisted EMI for Autism De-Escalation"'},
+  {id:'step-5',text:'<strong>Send NEXT for AUTISM inquiry</strong>',detail:'Draft is in your email. Copy-paste and send to: grants@nextforautism.org'},
+  {id:'step-6',text:'<strong>Test v10 prototype with Liam (calm moment)</strong>',detail:'New orb version with breathing intro. Use headphones. Password: QuantumNeuroshift2026!'},
+  {id:'step-7',text:'<strong>Share prototype link with Sean for clinical feedback</strong>',detail:'Send him the password-protected link + password after meeting Friday.'},
+  {id:'step-8',text:'<strong>BSA 300 peer replies</strong>',detail:'Send Slug screenshots of 2 classmate posts so he can draft replies.'},
+  {id:'step-9',text:'<strong>Set up Xcode on your Mac</strong>',detail:'Step-by-step guide in your email: "XCODE SETUP GUIDE". Swift source updated with orb views.'},
+  {id:'step-10',text:'<strong>Register on SAM.gov in June</strong>',detail:'sam.gov — takes 2-4 weeks. Required for SBIR. Start once LLC paperwork is ready.'},
 ];
 
 if(!state.steps) state.steps=defaultSteps;
